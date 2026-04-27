@@ -52,7 +52,7 @@ export function TaskBoard({ currentUserId }: { currentUserId: string }) {
 
   return (
     <>
-      <div className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-8">
+      <div className="mx-auto w-full max-w-6xl px-3 py-5 sm:px-6 sm:py-8">
 
         {/* page header */}
         <motion.div
@@ -63,7 +63,7 @@ export function TaskBoard({ currentUserId }: { currentUserId: string }) {
           className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-start sm:justify-between"
         >
           <div>
-            <h1 style={{ fontSize: "1.9rem", fontWeight: 800, lineHeight: 1.1 }}>
+            <h1 style={{ fontSize: "clamp(1.45rem, 4.8vw, 1.9rem)", fontWeight: 800, lineHeight: 1.1 }}>
               Project command center
             </h1>
             <p className="mt-1 text-sm sm:text-[0.95rem]" style={{ color: "var(--text-2)" }}>
@@ -73,7 +73,7 @@ export function TaskBoard({ currentUserId }: { currentUserId: string }) {
 
           <button
             onClick={() => setFormOpen(true)}
-            className="flex w-full items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-semibold transition-colors sm:w-auto"
+            className="flex w-full items-center justify-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition-colors sm:w-auto sm:py-2.5"
             style={{
               background: "var(--amber)",
               color: "#0b1018",
@@ -119,7 +119,7 @@ export function TaskBoard({ currentUserId }: { currentUserId: string }) {
           initial="initial"
           animate="animate"
           transition={{ duration: 0.42, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-5 rounded-2xl border p-3"
+          className="mb-5 rounded-2xl border p-2.5 sm:p-3"
           style={{ borderColor: "var(--border)", background: "rgba(18,26,37,0.8)" }}
         >
           {/* view tabs */}
@@ -128,7 +128,7 @@ export function TaskBoard({ currentUserId }: { currentUserId: string }) {
               <button
                 key={t}
                 onClick={() => setTab(t)}
-                className="shrink-0 rounded-lg px-3 py-1.5 text-sm transition-colors"
+                className="shrink-0 rounded-lg px-3 py-2 text-sm transition-colors"
                 style={{
                   background: tab === t ? "var(--surface-3)" : "transparent",
                   color: tab === t ? "var(--text)" : "var(--text-3)",
@@ -147,7 +147,7 @@ export function TaskBoard({ currentUserId }: { currentUserId: string }) {
               <button
                 key={id}
                 onClick={() => setStatus(id)}
-                className="shrink-0 rounded-full border px-3 py-1 text-xs font-semibold transition-all"
+                className="shrink-0 rounded-full border px-3 py-1.5 text-xs font-semibold transition-all"
                 style={{
                   borderColor: statusFilter === id ? "var(--amber-border)" : "var(--border)",
                   background: statusFilter === id ? "var(--amber-glow)" : "transparent",

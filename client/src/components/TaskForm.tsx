@@ -20,10 +20,10 @@ const field = `
   background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 9px 12px;
+  padding: 11px 12px;
   font-size: 0.875rem;
   color: var(--text);
-  font-family: "DM Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   outline: none;
   transition: border-color 0.15s;
 `
@@ -106,13 +106,13 @@ export function TaskForm({ open, onClose, onSubmit, editTask }: Props) {
             onClick={onClose}
           />
 
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 flex items-end justify-center p-2 sm:items-center sm:p-4">
             <motion.div
               initial={{ opacity: 0, scale: 0.96, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 10 }}
               transition={{ type: "spring", stiffness: 400, damping: 30 }}
-              className="w-full max-w-[520px] rounded-2xl shadow-2xl"
+              className="max-h-[92vh] w-full max-w-[520px] overflow-y-auto rounded-2xl rounded-b-none shadow-2xl sm:rounded-b-2xl"
               style={{ background: "rgba(18,26,37,0.96)", border: "1px solid var(--border-hi)" }}
               onClick={e => e.stopPropagation()}
             >
@@ -135,7 +135,7 @@ export function TaskForm({ open, onClose, onSubmit, editTask }: Props) {
                 </button>
               </div>
 
-              <form onSubmit={submit} className="space-y-4 p-5">
+              <form onSubmit={submit} className="space-y-4 p-4 sm:p-5">
 
                 {/* title */}
                 <div>
@@ -168,7 +168,7 @@ export function TaskForm({ open, onClose, onSubmit, editTask }: Props) {
                     style={{
                       width: "100%", background: "var(--surface-2)", border: "1px solid var(--border)",
                       borderRadius: "10px", padding: "9px 12px", fontSize: "0.875rem",
-                      color: "var(--text)", fontFamily: "DM Sans, sans-serif",
+                      color: "var(--text)", fontFamily: "Manrope, sans-serif",
                       outline: "none", resize: "none", transition: "border-color 0.15s",
                     } as any}
                     onFocus={e => (e.target.style.borderColor = "var(--amber)")}
@@ -186,7 +186,7 @@ export function TaskForm({ open, onClose, onSubmit, editTask }: Props) {
                       style={{
                         width: "100%", background: "var(--surface-2)", border: "1px solid var(--border)",
                         borderRadius: "10px", padding: "9px 12px", fontSize: "0.875rem",
-                        color: "var(--text)", fontFamily: "DM Sans, sans-serif", outline: "none",
+                        color: "var(--text)", fontFamily: "Manrope, sans-serif", outline: "none",
                       } as any}
                     >
                       <option value="LOW">Low</option>
@@ -204,7 +204,7 @@ export function TaskForm({ open, onClose, onSubmit, editTask }: Props) {
                         style={{
                           width: "100%", background: "var(--surface-2)", border: "1px solid var(--border)",
                           borderRadius: "10px", padding: "9px 12px", fontSize: "0.875rem",
-                          color: "var(--text)", fontFamily: "DM Sans, sans-serif", outline: "none",
+                          color: "var(--text)", fontFamily: "Manrope, sans-serif", outline: "none",
                         } as any}
                       >
                         <option value="PENDING">To Do</option>
@@ -240,7 +240,7 @@ export function TaskForm({ open, onClose, onSubmit, editTask }: Props) {
                       style={{
                         width: "100%", background: "var(--surface-2)", border: "1px solid var(--border)",
                         borderRadius: "10px", padding: "9px 12px", fontSize: "0.875rem",
-                        color: "var(--text)", fontFamily: "DM Sans, sans-serif", outline: "none",
+                        color: "var(--text)", fontFamily: "Manrope, sans-serif", outline: "none",
                       } as any}
                     />
                   </div>
@@ -262,7 +262,7 @@ export function TaskForm({ open, onClose, onSubmit, editTask }: Props) {
                           width: "100%", background: "var(--surface-2)", outline: "none",
                           border: `1px solid ${lookup === "found" ? "#34d399" : lookup === "missing" ? "var(--border)" : "var(--border)"}`,
                           borderRadius: "10px", padding: "9px 40px 9px 12px",
-                          fontSize: "0.875rem", color: "var(--text)", fontFamily: "DM Sans, sans-serif",
+                          fontSize: "0.875rem", color: "var(--text)", fontFamily: "Manrope, sans-serif",
                           transition: "border-color 0.15s",
                         } as any}
                         onFocus={e => (e.target.style.borderColor = lookup === "found" ? "#34d399" : "var(--amber)")}
@@ -300,7 +300,7 @@ export function TaskForm({ open, onClose, onSubmit, editTask }: Props) {
                   <button
                     type="button"
                     onClick={onClose}
-                    className="rounded-xl px-4 py-2 text-sm transition-colors"
+                    className="rounded-xl px-4 py-2.5 text-sm transition-colors"
                     style={{ color: "var(--text-2)" }}
                     onMouseEnter={e => (e.currentTarget.style.background = "var(--surface-2)")}
                     onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
@@ -310,7 +310,7 @@ export function TaskForm({ open, onClose, onSubmit, editTask }: Props) {
                   <button
                     type="submit"
                     disabled={saving || !title.trim()}
-                    className="flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-opacity"
+                    className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-opacity"
                     style={{
                       background: "var(--amber)",
                       color: "#0b1018",

@@ -37,7 +37,7 @@ export function Navbar() {
         backdropFilter: "blur(14px)",
       }}
     >
-      <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
+      <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-3 sm:px-6">
         <div className="flex items-center gap-3">
           <div
             className="flex h-8 w-8 items-center justify-center rounded-xl text-[11px] font-bold"
@@ -59,7 +59,7 @@ export function Navbar() {
           <div className="relative" ref={menuRef}>
             <button
               onClick={() => setMenuOpen(v => !v)}
-              className="flex items-center gap-2 rounded-full border px-2 py-1.5 transition-colors"
+              className="flex items-center gap-1.5 rounded-full border px-1.5 py-1.5 transition-colors sm:gap-2 sm:px-2"
               style={{ color: "var(--text-2)", borderColor: "var(--border)", background: "rgba(24,34,51,0.58)" }}
               onMouseEnter={e => (e.currentTarget.style.background = "rgba(32,45,66,0.92)")}
               onMouseLeave={e => (e.currentTarget.style.background = "rgba(24,34,51,0.58)")}
@@ -90,7 +90,7 @@ export function Navbar() {
 
             {menuOpen && (
               <div
-                className="absolute right-0 top-12 z-50 w-[270px] rounded-2xl border p-3 shadow-2xl"
+                className="absolute right-0 top-12 z-50 w-[min(92vw,270px)] rounded-2xl border p-3 shadow-2xl"
                 style={{
                   borderColor: "var(--border-hi)",
                   background: "rgba(18,26,37,0.98)",

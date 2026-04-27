@@ -69,10 +69,10 @@ export function TaskCard({ task, currentUserId, onStatusChange, onDelete, onEdit
       {/* left priority stripe — color-codes the task at a glance */}
       <div className="w-1 self-stretch shrink-0" style={{ background: stripe }} />
 
-      <div className="flex flex-1 items-start gap-3 px-4 py-4">
+      <div className="flex flex-1 items-start gap-2.5 px-3 py-3.5 sm:gap-3 sm:px-4 sm:py-4">
         {/* status toggle */}
         <motion.button
-          className="mt-0.5 shrink-0 rounded-full transition-transform hover:scale-110"
+          className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-transform hover:scale-110"
           onClick={() => onStatusChange(task._id, STATUS_CYCLE[task.status])}
           title={`Mark as ${STATUS_DOT[STATUS_CYCLE[task.status]].label}`}
           style={{ lineHeight: 0 }}
@@ -165,8 +165,9 @@ export function TaskCard({ task, currentUserId, onStatusChange, onDelete, onEdit
           <div className="relative shrink-0">
             <button
               onClick={() => setMenuOpen(v => !v)}
-              className="rounded-lg p-1 opacity-0 transition-opacity group-hover:opacity-100"
+              className="rounded-lg p-1.5 opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100"
               style={{ color: "var(--text-3)" }}
+              aria-label="Open task actions"
             >
               <MoreHorizontal size={15} />
             </button>

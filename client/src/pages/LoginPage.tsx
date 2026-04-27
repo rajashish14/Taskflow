@@ -16,6 +16,7 @@ const squares = [
 export function LoginPage() {
   const { login } = useAuth()
   const [loading, setLoading] = useState(false)
+  const buttonWidth = typeof window !== "undefined" && window.innerWidth < 380 ? "240" : "300"
 
   async function handleCredential(credential: string) {
     setLoading(true)
@@ -36,7 +37,7 @@ export function LoginPage() {
       {squares.map((sq, i) => (
         <div
           key={i}
-          className="pointer-events-none absolute border"
+          className={`pointer-events-none absolute border ${i > 2 ? "hidden sm:block" : ""}`}
           style={{
             width: sq.size,
             height: sq.size,
@@ -61,7 +62,7 @@ export function LoginPage() {
         className="relative z-10 w-full max-w-[420px]"
       >
         {/* wordmark */}
-        <div className="mb-10 text-center">
+        <div className="mb-7 text-center sm:mb-10">
           <div className="mb-4 inline-flex items-center gap-2">
             <div
               className="flex h-9 w-9 items-center justify-center rounded-lg text-sm font-bold"
@@ -80,7 +81,7 @@ export function LoginPage() {
 
         {/* card */}
         <div
-          className="rounded-2xl p-8"
+          className="rounded-2xl p-5 sm:p-8"
           style={{
             background: "rgba(18,26,37,0.9)",
             border: "1px solid var(--border)",
@@ -111,7 +112,7 @@ export function LoginPage() {
               theme="filled_black"
               shape="rectangular"
               size="large"
-              width="300"
+              width={buttonWidth}
               text="continue_with"
             />
           )}
