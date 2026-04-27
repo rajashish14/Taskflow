@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;1,400&family=DM+Mono&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg:           #0d0d10;
+  --surface:      #16161b;
+  --surface-2:    #1d1d24;
+  --surface-3:    #252530;
+  --border:       #2c2c38;
+  --border-hi:    #3d3d4e;
+  --text:         #eaeaf2;
+  --text-2:       #9898aa;
+  --text-3:       #4e4e62;
+  --amber:        #f0a500;
+  --amber-glow:   rgba(240,165,0,0.15);
+  --amber-border: rgba(240,165,0,0.3);
+  --green:        #34d399;
+  --blue:         #60a5fa;
+  --red:          #f87171;
+}
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-size: 15px;
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "DM Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.4);
+    cursor: pointer;
+  }
+
+  select option { background: var(--surface-2); }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+}
