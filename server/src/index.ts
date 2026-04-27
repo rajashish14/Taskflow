@@ -25,7 +25,7 @@ if (missingEnv.length > 0) {
 }
 
 const allowedOrigins = new Set(
-  [process.env.CLIENT_URL, process.env.CLIENT_URLS]
+  [process.env.CLIENT_HOSTED_URL, process.env.CLIENT_LOCAL_URL]
     .filter(Boolean)
     .flatMap((value) => value!.split(","))
     .map((origin) => origin.trim())
@@ -74,7 +74,7 @@ const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 20 })
 app.use("/api/auth", authLimiter)
 
 // ── routes ────────────────────────────────────────────────────────────────────
-
+app.get("/", (_req, res) => res.send("Collab Tasks API"))
 app.use("/api/auth", authRoutes)
 app.use("/api/tasks", taskRoutes)
 app.use("/api/users", userRoutes)
