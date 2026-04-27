@@ -1,7 +1,9 @@
 import axios from "axios"
 
+const serverUrl = import.meta.env.VITE_SERVER_URL?.trim().replace(/\/+$/, "")
+
 const api = axios.create({
-  baseURL: "/api",
+  baseURL: serverUrl ? `${serverUrl}/api` : "/api",
 })
 
 // attach stored JWT on every outgoing request
