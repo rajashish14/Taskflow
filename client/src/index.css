@@ -1,25 +1,27 @@
-@import url("https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;1,400&family=DM+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@600;700;800&family=JetBrains+Mono:wght@400;600&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --bg:           #0d0d10;
-  --surface:      #16161b;
-  --surface-2:    #1d1d24;
-  --surface-3:    #252530;
-  --border:       #2c2c38;
-  --border-hi:    #3d3d4e;
-  --text:         #eaeaf2;
-  --text-2:       #9898aa;
-  --text-3:       #4e4e62;
-  --amber:        #f0a500;
-  --amber-glow:   rgba(240,165,0,0.15);
-  --amber-border: rgba(240,165,0,0.3);
+  --bg:           #0b1018;
+  --surface:      #121a25;
+  --surface-2:    #182233;
+  --surface-3:    #202d42;
+  --border:       #293449;
+  --border-hi:    #3b4f6f;
+  --text:         #eef4ff;
+  --text-2:       #afbdd3;
+  --text-3:       #6f829f;
+  --amber:        #f7b441;
+  --amber-glow:   rgba(247,180,65,0.16);
+  --amber-border: rgba(247,180,65,0.35);
   --green:        #34d399;
-  --blue:         #60a5fa;
-  --red:          #f87171;
+  --blue:         #7cb3ff;
+  --red:          #ff8c83;
+  --hero-a:       rgba(124, 179, 255, 0.16);
+  --hero-b:       rgba(247, 180, 65, 0.11);
 }
 
 @layer base {
@@ -28,14 +30,28 @@
   html {
     font-size: 15px;
     color-scheme: dark;
+    scroll-behavior: smooth;
   }
 
   body {
-    background: var(--bg);
+    background:
+      radial-gradient(900px 560px at -10% -10%, var(--hero-a), transparent 55%),
+      radial-gradient(800px 520px at 110% -5%, var(--hero-b), transparent 56%),
+      linear-gradient(180deg, #09111d 0%, var(--bg) 38%, #090f16 100%);
     color: var(--text);
-    font-family: "DM Sans", sans-serif;
+    font-family: "Manrope", sans-serif;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
     min-height: 100vh;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: "Sora", sans-serif;
+    letter-spacing: -0.02em;
   }
 
   input[type="date"]::-webkit-calendar-picker-indicator {
@@ -48,4 +64,8 @@
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+}
+
+@media (max-width: 640px) {
+  html { font-size: 14px; }
 }

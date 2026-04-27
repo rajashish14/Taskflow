@@ -48,32 +48,35 @@ export function TaskCard({ task, currentUserId, onStatusChange, onDelete, onEdit
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.97 }}
       transition={{ duration: 0.18 }}
-      className="group relative flex items-start gap-0 overflow-hidden rounded-xl"
+      className="group relative flex items-start gap-0 overflow-visible rounded-2xl"
       style={{
-        background: "var(--surface)",
+        background: "rgba(18,26,37,0.88)",
         border: "1px solid var(--border)",
         opacity: isDone ? 0.55 : 1,
-        transition: "border-color 0.15s, box-shadow 0.15s",
+        transition: "border-color 0.15s, box-shadow 0.15s, transform 0.15s",
       }}
       onMouseEnter={e => {
         (e.currentTarget as HTMLElement).style.borderColor = "var(--border-hi)"
-        ;(e.currentTarget as HTMLElement).style.boxShadow = "0 4px 24px rgba(0,0,0,0.35)"
+        ;(e.currentTarget as HTMLElement).style.boxShadow = "0 14px 40px rgba(0,0,0,0.28)"
+        ;(e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"
       }}
       onMouseLeave={e => {
         (e.currentTarget as HTMLElement).style.borderColor = "var(--border)"
         ;(e.currentTarget as HTMLElement).style.boxShadow = "none"
+        ;(e.currentTarget as HTMLElement).style.transform = "translateY(0)"
       }}
     >
       {/* left priority stripe — color-codes the task at a glance */}
       <div className="w-1 self-stretch shrink-0" style={{ background: stripe }} />
 
-      <div className="flex flex-1 items-start gap-3 px-4 py-3.5">
+      <div className="flex flex-1 items-start gap-3 px-4 py-4">
         {/* status toggle */}
-        <button
+        <motion.button
           className="mt-0.5 shrink-0 rounded-full transition-transform hover:scale-110"
           onClick={() => onStatusChange(task._id, STATUS_CYCLE[task.status])}
           title={`Mark as ${STATUS_DOT[STATUS_CYCLE[task.status]].label}`}
           style={{ lineHeight: 0 }}
+          whileTap={{ scale: 0.92 }}
         >
           <svg width="16" height="16" viewBox="0 0 16 16">
             {isDone ? (
@@ -90,7 +93,7 @@ export function TaskCard({ task, currentUserId, onStatusChange, onDelete, onEdit
               <circle cx="8" cy="8" r="7.5" fill="none" stroke="var(--border-hi)" strokeWidth="1.5" />
             )}
           </svg>
-        </button>
+        </motion.button>
 
         {/* main content */}
         <div className="min-w-0 flex-1">
@@ -113,8 +116,8 @@ export function TaskCard({ task, currentUserId, onStatusChange, onDelete, onEdit
           <div className="mt-2 flex flex-wrap items-center gap-2">
             {/* status pill */}
             <span
-              className="flex items-center gap-1 rounded-full px-2 py-0.5 text-xs"
-              style={{ background: "var(--surface-2)", color: dot.color }}
+                className="flex items-center gap-1 rounded-full px-2 py-0.5 text-xs"
+                style={{ background: "rgba(24,34,51,0.9)", color: dot.color, border: "1px solid var(--border)" }}
             >
               <span className="h-1.5 w-1.5 rounded-full" style={{ background: dot.color }} />
               {dot.label}
@@ -127,6 +130,7 @@ export function TaskCard({ task, currentUserId, onStatusChange, onDelete, onEdit
                 style={{
                   background: due.urgent ? "rgba(248,113,113,0.1)" : "var(--surface-2)",
                   color: due.urgent ? "var(--red)" : "var(--text-2)",
+                  border: "1px solid var(--border)",
                 }}
               >
                 {due.text}
@@ -170,13 +174,17 @@ export function TaskCard({ task, currentUserId, onStatusChange, onDelete, onEdit
             {menuOpen && (
               <>
                 <div className="fixed inset-0 z-10" onClick={() => setMenuOpen(false)} />
-                <div
-                  className="absolute right-0 top-6 z-20 min-w-[128px] rounded-xl py-1.5 shadow-2xl"
+                <motion.div
+                  initial={{ opacity: 0, y: -4, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -4, scale: 0.98 }}
+                  transition={{ duration: 0.14 }}
+                  className="absolute right-0 top-7 z-20 min-w-[156px] rounded-xl py-1.5 shadow-2xl"
                   style={{ background: "var(--surface-2)", border: "1px solid var(--border-hi)" }}
                 >
                   <button
                     onClick={() => { setMenuOpen(false); onEdit(task) }}
-                    className="flex w-full items-center gap-2 px-3 py-1.5 text-sm transition-colors"
+                    className="flex w-full items-center gap-2 whitespace-nowrap px-3.5 py-2 text-sm transition-colors"
                     style={{ color: "var(--text-2)" }}
                     onMouseEnter={e => (e.currentTarget.style.color = "var(--text)")}
                     onMouseLeave={e => (e.currentTarget.style.color = "var(--text-2)")}
@@ -186,13 +194,13 @@ export function TaskCard({ task, currentUserId, onStatusChange, onDelete, onEdit
                   </button>
                   <button
                     onClick={() => { setMenuOpen(false); onDelete(task._id) }}
-                    className="flex w-full items-center gap-2 px-3 py-1.5 text-sm transition-colors"
+                    className="flex w-full items-center gap-2 whitespace-nowrap px-3.5 py-2 text-sm transition-colors"
                     style={{ color: "var(--red)" }}
                   >
                     <Trash2 size={13} />
                     Delete
                   </button>
-                </div>
+                </motion.div>
               </>
             )}
           </div>

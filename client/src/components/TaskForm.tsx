@@ -112,8 +112,8 @@ export function TaskForm({ open, onClose, onSubmit, editTask }: Props) {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 10 }}
               transition={{ type: "spring", stiffness: 400, damping: 30 }}
-              className="w-full max-w-[440px] rounded-2xl shadow-2xl"
-              style={{ background: "var(--surface)", border: "1px solid var(--border-hi)" }}
+              className="w-full max-w-[520px] rounded-2xl shadow-2xl"
+              style={{ background: "rgba(18,26,37,0.96)", border: "1px solid var(--border-hi)" }}
               onClick={e => e.stopPropagation()}
             >
               {/* header */}
@@ -121,7 +121,7 @@ export function TaskForm({ open, onClose, onSubmit, editTask }: Props) {
                 className="flex items-center justify-between px-5 py-4"
                 style={{ borderBottom: "1px solid var(--border)" }}
               >
-                <h2 style={{ fontFamily: "Syne, sans-serif", fontSize: "1rem", fontWeight: 700 }}>
+                <h2 style={{ fontFamily: "Sora, sans-serif", fontSize: "1rem", fontWeight: 700 }}>
                   {isEdit ? "Edit task" : "New task"}
                 </h2>
                 <button
@@ -177,7 +177,7 @@ export function TaskForm({ open, onClose, onSubmit, editTask }: Props) {
                 </div>
 
                 {/* row: priority + status OR due date */}
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   <div>
                     <label className="mb-1.5 block text-xs font-medium" style={{ color: "var(--text-2)" }}>Priority</label>
                     <select
@@ -285,7 +285,7 @@ export function TaskForm({ open, onClose, onSubmit, editTask }: Props) {
                       {lookup === "missing" && (
                         <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
                           className="mt-1.5 text-xs" style={{ color: "var(--amber)" }}>
-                          No account yet — task will be linked when they sign up
+                          User with this email not found. The task will link when they sign up.
                         </motion.p>
                       )}
                     </AnimatePresence>
@@ -313,8 +313,8 @@ export function TaskForm({ open, onClose, onSubmit, editTask }: Props) {
                     className="flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-opacity"
                     style={{
                       background: "var(--amber)",
-                      color: "#0d0d10",
-                      fontFamily: "Syne, sans-serif",
+                      color: "#0b1018",
+                      fontFamily: "Sora, sans-serif",
                       opacity: saving || !title.trim() ? 0.5 : 1,
                       cursor: saving || !title.trim() ? "not-allowed" : "pointer",
                     }}

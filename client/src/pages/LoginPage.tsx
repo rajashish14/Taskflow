@@ -21,8 +21,8 @@ export function LoginPage() {
     setLoading(true)
     try {
       await login(credential)
-    } catch {
-      toast.error("Sign-in failed — please try again")
+    } catch (err: any) {
+      toast.error(err?.response?.data?.error ?? "Sign-in failed. Please try again.")
       setLoading(false)
     }
   }
@@ -58,18 +58,18 @@ export function LoginPage() {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 w-full max-w-[400px]"
+        className="relative z-10 w-full max-w-[420px]"
       >
         {/* wordmark */}
         <div className="mb-10 text-center">
           <div className="mb-4 inline-flex items-center gap-2">
             <div
               className="flex h-9 w-9 items-center justify-center rounded-lg text-sm font-bold"
-              style={{ background: "var(--amber)", color: "#0d0d10", fontFamily: "Syne, sans-serif" }}
+              style={{ background: "var(--amber)", color: "#0b1018", fontFamily: "Sora, sans-serif" }}
             >
               TF
             </div>
-            <span style={{ fontFamily: "Syne, sans-serif", fontSize: "1.25rem", fontWeight: 700, letterSpacing: "-0.02em" }}>
+            <span style={{ fontFamily: "Sora, sans-serif", fontSize: "1.25rem", fontWeight: 700, letterSpacing: "-0.02em" }}>
               Taskflow
             </span>
           </div>
@@ -81,11 +81,15 @@ export function LoginPage() {
         {/* card */}
         <div
           className="rounded-2xl p-8"
-          style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
+          style={{
+            background: "rgba(18,26,37,0.9)",
+            border: "1px solid var(--border)",
+            boxShadow: "0 20px 50px rgba(0,0,0,0.25)",
+          }}
         >
           <h1
             className="mb-2"
-            style={{ fontFamily: "Syne, sans-serif", fontSize: "1.5rem", fontWeight: 700, letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "Sora, sans-serif", fontSize: "1.5rem", fontWeight: 700, letterSpacing: "-0.02em" }}
           >
             Welcome back
           </h1>
@@ -107,7 +111,7 @@ export function LoginPage() {
               theme="filled_black"
               shape="rectangular"
               size="large"
-              width="320"
+              width="300"
               text="continue_with"
             />
           )}
@@ -125,11 +129,18 @@ export function LoginPage() {
               "Personal + shared task boards",
               "Assign by email, even before they join",
               "Live updates via Socket.io",
-            ].map((f) => (
-              <li key={f} className="flex items-center gap-2.5 text-sm" style={{ color: "var(--text-2)" }}>
+            ].map((f, i) => (
+              <motion.li
+                key={f}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.32, delay: 0.2 + i * 0.06 }}
+                className="flex items-center gap-2.5 text-sm"
+                style={{ color: "var(--text-2)" }}
+              >
                 <span style={{ color: "var(--amber)", fontSize: "0.7rem" }}>◆</span>
                 {f}
-              </li>
+              </motion.li>
             ))}
           </ul>
         </div>

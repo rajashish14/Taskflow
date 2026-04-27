@@ -27,16 +27,18 @@ export default function App() {
         <Toaster
           position="bottom-right"
           toastOptions={{
+            duration: 2600,
             style: {
-              background: "#1d1d24",
-              color: "#eaeaf2",
-              border: "1px solid #2c2c38",
-              borderRadius: "12px",
+              background: "rgba(18,26,37,0.96)",
+              color: "#eef4ff",
+              border: "1px solid #3b4f6f",
+              borderRadius: "14px",
               fontSize: "13px",
-              fontFamily: "DM Sans, sans-serif",
+              fontFamily: "Manrope, sans-serif",
+              boxShadow: "0 14px 40px rgba(0,0,0,0.35)",
             },
-            success: { iconTheme: { primary: "#34d399", secondary: "#1d1d24" } },
-            error:   { iconTheme: { primary: "#f87171", secondary: "#1d1d24" } },
+            success: { iconTheme: { primary: "#34d399", secondary: "#182233" } },
+            error: { iconTheme: { primary: "#ff8c83", secondary: "#182233" } },
           }}
         />
       </AuthProvider>

@@ -8,12 +8,12 @@ const shimmer = {
 export function SkeletonCard() {
   return (
     <div
-      className="flex items-start gap-3 rounded-xl p-4"
-      style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
+      className="flex items-start gap-3 rounded-2xl p-4"
+      style={{ background: "rgba(18,26,37,0.85)", border: "1px solid var(--border)" }}
     >
-      <div className="mt-0.5 h-4 w-4 shrink-0 rounded" style={shimmer} />
+      <div className="mt-0.5 h-4 w-4 shrink-0 rounded-full" style={shimmer} />
       <div className="flex-1 space-y-2.5">
-        <div className="h-3.5 rounded" style={{ ...shimmer, width: "62%" }} />
+        <div className="h-3.5 rounded" style={{ ...shimmer, width: "74%" }} />
         <div className="h-3 rounded" style={{ ...shimmer, width: "40%" }} />
         <div className="flex gap-2 pt-1">
           <div className="h-4 w-12 rounded-full" style={shimmer} />
