@@ -24,11 +24,24 @@ if (missingEnv.length > 0) {
   process.exit(1)
 }
 
+function normalizeOrigin(value?: string): string | null {
+  if (!value) return null
+  const trimmed = value.trim()
+  if (!trimmed) return null
+
+  try {
+    return new URL(trimmed).origin
+  } catch {
+    // Fallback for non-standard values; still normalize trailing slash.
+    return trimmed.replace(/\/+$/, "")
+  }
+}
+
 const allowedOrigins = new Set(
   [process.env.CLIENT_HOSTED_URL, process.env.CLIENT_LOCAL_URL]
     .filter(Boolean)
     .flatMap((value) => value!.split(","))
-    .map((origin) => origin.trim())
+    .map((origin) => normalizeOrigin(origin))
     .filter(Boolean)
 )
 
@@ -38,7 +51,11 @@ if (allowedOrigins.size === 0) {
 
 function isAllowedOrigin(origin?: string): boolean {
   if (!origin) return true
-  return allowedOrigins.has(origin)
+
+  const normalizedOrigin = normalizeOrigin(origin)
+  if (!normalizedOrigin) return false
+
+  return allowedOrigins.has(normalizedOrigin)
 }
 
 const corsOptions: CorsOptions = {
