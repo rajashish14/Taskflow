@@ -63,7 +63,18 @@ export function useTasks() {
   const updateTask = useCallback(async (id: string, input: UpdateTaskInput) => {
     // optimistic update so the UI feels instant
     setTasks((prev) =>
-      prev.map((t) => (t._id === id ? { ...t, ...input } : t))
+      prev.map((t) => {
+        if (t._id !== id) return t
+
+        const normalizedDueDate =
+          input.dueDate === null ? undefined : input.dueDate ?? t.dueDate
+
+        return {
+          ...t,
+          ...input,
+          dueDate: normalizedDueDate,
+        }
+      })
     )
 
     try {
