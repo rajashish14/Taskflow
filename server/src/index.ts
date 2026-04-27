@@ -3,6 +3,7 @@ import http from "http"
 import { Server as SocketServer } from "socket.io"
 import mongoose from "mongoose"
 import cors from "cors"
+import type { CorsOptions } from "cors"
 import helmet from "helmet"
 import rateLimit from "express-rate-limit"
 import dotenv from "dotenv"
@@ -23,14 +24,40 @@ if (missingEnv.length > 0) {
   process.exit(1)
 }
 
+const allowedOrigins = new Set(
+  [process.env.CLIENT_URL, process.env.CLIENT_URLS]
+    .filter(Boolean)
+    .flatMap((value) => value!.split(","))
+    .map((origin) => origin.trim())
+    .filter(Boolean)
+)
+
+if (allowedOrigins.size === 0) {
+  allowedOrigins.add("http://localhost:5173")
+}
+
+function isAllowedOrigin(origin?: string): boolean {
+  if (!origin) return true
+  return allowedOrigins.has(origin)
+}
+
+const corsOptions: CorsOptions = {
+  origin(origin, callback) {
+    if (isAllowedOrigin(origin)) {
+      callback(null, true)
+      return
+    }
+
+    callback(new Error(`CORS blocked for origin: ${origin}`))
+  },
+  credentials: true,
+}
+
 const app = express()
 const server = http.createServer(app)
 
 const io = new SocketServer(server, {
-  cors: {
-    origin: process.env.CLIENT_URL ?? "http://localhost:5173",
-    credentials: true,
-  },
+  cors: corsOptions,
 })
 
 initSocket(io)
@@ -38,12 +65,8 @@ initSocket(io)
 // ── middleware ────────────────────────────────────────────────────────────────
 
 app.use(helmet())
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL ?? "http://localhost:5173",
-    credentials: true,
-  })
-)
+app.use(cors(corsOptions))
+app.options("*", cors(corsOptions))
 app.use(express.json())
 
 // light rate limiting on auth endpoint to slow down credential stuffing
